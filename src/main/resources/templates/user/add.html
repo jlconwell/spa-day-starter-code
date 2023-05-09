@@ -27,10 +27,8 @@
 
         <label>
             Verify Password:
-            <input type = 'password' name = 'verify'>
+            <input type="password" th:field="${user.verifyPassword}">
         </label>
-
-        <p class="error" th:text="${verifyError}"></p>
 
         <input type = 'submit' value = 'Sign Up'>
     </form>

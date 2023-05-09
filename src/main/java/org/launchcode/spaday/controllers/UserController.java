@@ -20,10 +20,7 @@ public class UserController {
 
     @PostMapping
     public String processAddUserForm(Model model, @ModelAttribute @Valid User user, Errors errors, String verify) {
-        if (errors.hasErrors() || !(user.getPassword().equals(verify))) {
-            if (!(user.getPassword().equals(verify))){
-                model.addAttribute("verifyError", "Passwords do not match");
-            }
+        if (errors.hasErrors()) {
             return "user/add";
         }
 

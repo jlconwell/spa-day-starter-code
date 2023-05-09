@@ -7,25 +7,29 @@ import javax.validation.constraints.Size;
 
 public class User {
 
-    @NotBlank(message="Username cannot be empty.")
+    @NotBlank(message = "Username cannot be empty.")
     @Size(min = 5, max = 15, message = "Username must be between 5 and 15 characters.")
     private String username;
 
     @Email
     private String email;
-    @NotBlank(message="Password is required.")
-    @Size(min = 6, message="Password must be at least 6 characters.")
+    @NotBlank(message = "Password is required.")
+    @Size(min = 6, message = "Password must be at least 6 characters.")
     private String password;
+
+    @NotNull(message = "Passwords do not match.")
+    private String verifyPassword;
 
     public User() {
 
     }
 
-    public User(String username, String email, String password) {
+    public User(String username, String email, String password, String verifyPassword) {
         this();
         this.username = username;
         this.email = email;
         this.password = password;
+        this.verifyPassword = verifyPassword;
     }
 
     public String getUsername() {
@@ -50,5 +54,24 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+        checkPassword();
+    }
+
+    public String getVerifyPassword() {
+        return verifyPassword;
+    }
+
+    public void setVerifyPassword(String verifyPassword) {
+        this.verifyPassword = verifyPassword;
+        checkPassword();
+    }
+
+    private void checkPassword() {
+        if (password != null && verifyPassword != null) {
+            if (!(password.equals(verifyPassword))) {
+                verifyPassword = null;
+            }
+
+        }
     }
 }
